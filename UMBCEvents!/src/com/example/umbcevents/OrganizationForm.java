@@ -4,13 +4,37 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class OrganizationForm extends ActionBarActivity {
 
+	EditText ETEventName;
+	EditText ETOrgName;
+	EditText ETEventLocation;
+	EditText ETTages;
+	EditText ETExtraInfo;
+	Button BstartTime;
+	Button BendTime;
+	Button Bsubmit;
+	
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_organization_form);
+		ETEventName = (EditText) findViewById(R.id.incEventName);
+		ETOrgName = (EditText) findViewById(R.id.incOrgNameForm);
+		ETEventLocation = (EditText) findViewById(R.id.incEventLocation);
+		ETTages = (EditText) findViewById(R.id.incTags);
+		ETExtraInfo = (EditText) findViewById(R.id.incEventInfo);
+		BstartTime = (Button) findViewById(R.id.enterStartTime);
+		BendTime = (Button) findViewById(R.id.enterFinishTime);
+		Bsubmit = (Button) findViewById(R.id.submitButton);
+		
+		
+		
 	}
 
 	@Override

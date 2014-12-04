@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,15 +25,18 @@
         </activity>
         <activity
             android:name=".OrganizationForm"
-            android:label="@string/title_activity_organization_form" >
+            android:label="@string/title_activity_organization_form" 
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".StudentActivity"
-            android:label="@string/title_activity_student" >
+            android:label="@string/title_activity_student" 
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/title_activity_settings" 
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

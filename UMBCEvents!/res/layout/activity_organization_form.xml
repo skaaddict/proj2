@@ -15,71 +15,96 @@
     
     <EditText
         android:id="@+id/incEventName"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-       
+        android:layout_width="550dp"
+        android:layout_height="50dp"
+       	android:ellipsize="start"
         android:hint="@string/eventNameHint" 
-        android:background="@color/Black"
+        android:background="@drawable/cute_text_edit"
+        android:layout_gravity="center"
         android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        />
 
     <EditText
         android:id="@+id/incOrgNameForm"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-       
+        android:layout_width="550dp"
+        android:layout_height="50dp"
+       android:layout_gravity="center"
         android:hint="@string/hello_world" 
-        android:background="@color/Black"
+        android:background="@drawable/cute_text_edit"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"/>
 
     <EditText
         android:id="@+id/incEventLocation"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        
+        android:layout_width="550dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
         android:hint="@string/eventLocHint" 
-        android:background="@color/Black"
+        android:background="@drawable/cute_text_edit"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"/>
 
     <Button
         android:id="@+id/enterStartTime"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_width="425dp"
+        android:layout_height="100dp"
         android:text="@string/startTimeButton" 
-        android:background="@color/Black"
+        android:textColor="@color/Silver"
+        android:layout_gravity="center"
+        android:background="@drawable/pretty_button"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"/>
 
     <Button
         android:id="@+id/enterFinishTime"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_width="425dp"
+        android:layout_height="100dp"
         android:text="@string/endTimeButton"
-        android:background="@color/Black"
+        android:textColor="@color/Silver"
+        android:layout_gravity="center"
+        android:background="@drawable/pretty_button"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp" />
 
     <EditText
         android:id="@+id/incTags"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        
+        android:layout_width="550dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
         android:hint="@string/tagHint" 
-        android:background="@color/Black"
+        android:background="@drawable/cute_text_edit"
      
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"/>
 
     <EditText
         android:id="@+id/incEventInfo"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        
+        android:layout_width="550dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
         android:hint="@string/eventInfo" 
-        android:background="@color/Black"
+        android:background="@drawable/cute_text_edit"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/submitMessageBrother"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submitMessage"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp" />
+    
+        <Button
+        android:id="@+id/submitButton"
+        android:layout_width="550dp"
+        android:layout_height="100dp"
+        android:text="@string/submitButtonText" 
+        android:textColor="@color/Silver"
+        android:layout_gravity="center"
+        android:background="@drawable/pretty_button"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="50dp"/>
 
 </LinearLayout>
