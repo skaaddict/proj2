@@ -20,4 +20,7 @@
     <string name="submitMessage">After filling in all the information, 
         click the submit button.</string>
     <string name="datePickerButton">Enter a date for you event!</string>
+    <string name="search_hint">Search Events</string>
+    <string name="search">Search</string>
+        
 </resources>
