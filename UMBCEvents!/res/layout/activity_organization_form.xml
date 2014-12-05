@@ -30,7 +30,7 @@
         android:layout_width="550dp"
         android:layout_height="50dp"
        android:layout_gravity="center"
-        android:hint="@string/hello_world" 
+        android:hint="Organization Name" 
         android:background="@drawable/cute_text_edit"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"/>

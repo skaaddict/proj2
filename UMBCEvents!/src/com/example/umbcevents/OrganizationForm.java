@@ -105,7 +105,7 @@ public class OrganizationForm extends ActionBarActivity {
 						// TODO Auto-generated method stub
 						if (counter == 1) {
 							eventDay = dayOfMonth;
-							eventMonth = monthOfYear;
+							eventMonth = monthOfYear + 1;
 							eventYear = year;
 						}
 						counter++;
@@ -123,6 +123,7 @@ public class OrganizationForm extends ActionBarActivity {
 		// TODO Auto-generated method stub
 		boolean canWeSubmit = false;
 		String errorMessage = "The following fields have not been filled out:\n";
+		String successMessage = "Your form:\n";
 		// Need to check all the categories, if they aren't filled in tell user.
 		String messageEventName = ETEventName.getText().toString();
 		String messageOrgName = ETOrgName.getText().toString();
@@ -146,6 +147,7 @@ public class OrganizationForm extends ActionBarActivity {
 			eventNameGood = true;
 			ETEventName.setBackground(getResources().getDrawable(
 					R.drawable.cute_text_edit));
+			successMessage += "Event name: " + messageEventName + "\n";
 		} else {
 			errorMessage += "-Event name was not specified.\n";
 			ETEventName.setBackground(getResources().getDrawable(
@@ -157,6 +159,7 @@ public class OrganizationForm extends ActionBarActivity {
 			orgNameGood = true;
 			ETOrgName.setBackground(getResources().getDrawable(
 					R.drawable.cute_text_edit));
+			successMessage += "Organization Name: " + messageOrgName + "\n";
 		} else {
 			ETOrgName.setBackground(getResources().getDrawable(
 					R.drawable.bad_box));
@@ -167,6 +170,7 @@ public class OrganizationForm extends ActionBarActivity {
 			locationGood = true;
 			ETEventLocation.setBackground(getResources().getDrawable(
 					R.drawable.cute_text_edit));
+			successMessage += "Event Location: " + messageEventLocation + "\n";
 		} else {
 			ETEventLocation.setBackground(getResources().getDrawable(
 					R.drawable.bad_box));
@@ -178,6 +182,7 @@ public class OrganizationForm extends ActionBarActivity {
 			tagsGood = true;
 			ETTages.setBackground(getResources().getDrawable(
 					R.drawable.cute_text_edit));
+			successMessage += "Tags: " + messageTags + "\n";
 		} else {
 			ETTages.setBackground(getResources()
 					.getDrawable(R.drawable.bad_box));
@@ -192,6 +197,7 @@ public class OrganizationForm extends ActionBarActivity {
 			extraInfoGood = true;
 			ETExtraInfo.setBackground(getResources().getDrawable(
 					R.drawable.cute_text_edit));
+			successMessage += "Event Details: " + messageExtraInfo + "\n";
 		} else {
 			ETExtraInfo.setBackground(getResources().getDrawable(
 					R.drawable.bad_box));
@@ -229,12 +235,16 @@ public class OrganizationForm extends ActionBarActivity {
 						R.drawable.pretty_button));
 				BendTime.setBackground(getResources().getDrawable(
 						R.drawable.pretty_button));
+				successMessage += "Event Start Time: " + startHour + ":" + startMinute + 
+						"\nEvent End Time: " + finishHour + ":" + finishMinute + "\n";
 			} else if (startHour == finishHour && startMinute < finishMinute){
 				startStopGood = true;
 				BstartTime.setBackground(getResources().getDrawable(
 						R.drawable.pretty_button));
 				BendTime.setBackground(getResources().getDrawable(
 						R.drawable.pretty_button));
+				successMessage += "Event Start Time: " + startHour + ":" + startMinute + 
+						"\nEvent End Time: " + finishHour + ":" + finishMinute + "\n";
 			} else {
 				BstartTime.setBackground(getResources().getDrawable(
 						R.drawable.bad_button));
@@ -250,6 +260,7 @@ public class OrganizationForm extends ActionBarActivity {
 			dateGood = true;
 			BDatePicker.setBackground(getResources().getDrawable(
 					R.drawable.pretty_button));
+			successMessage += "Event Date: " + eventMonth + "/" + eventDay  + "/" + eventYear + "\n";
 		} else {
 			errorMessage += "You didn't specify a date for your event!";
 			BDatePicker.setBackground(getResources().getDrawable(
@@ -261,7 +272,7 @@ public class OrganizationForm extends ActionBarActivity {
 		// Or if not, tell user what was wrong.
 		if (eventNameGood && orgNameGood && locationGood && tagsGood
 				&& extraInfoGood && startStopGood && dateGood) {
-			infoGood();
+			infoGood(successMessage);
 		} else {
 			infoBad(errorMessage);
 		}
@@ -283,9 +294,32 @@ public class OrganizationForm extends ActionBarActivity {
 	     .show();
 	}
 
-	private void infoGood() {
+	private void infoGood(String successMessage) {
 		// TODO Auto-generated method stub
+		new AlertDialog.Builder(this)
+	    .setTitle("One last look!" )
+	   
+	    .setMessage( "If everything looks ok, click \"ok\" and we'll submit it! " +
+	    		"If not, simply click \"cancel\" and you can go back and modify your event.\n\n" + successMessage)
+	    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+	        public void onClick(DialogInterface dialog, int which) { 
+	            // continue with delete
+	        	submitForm();
+	        }
+	     })
+	   
+	       .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+	        public void onClick(DialogInterface dialog, int which) { 
+	            // continue with delete
+	        }
+	     })
+	    .setIcon(android.R.drawable.ic_menu_info_details)
+	     .show();
+	}
 
+	protected void submitForm() {
+		// TODO Auto-generated method stub
+		debugToast("Submitting form");
 	}
 
 	protected void createEndClock() {
