@@ -1224,9 +1224,11 @@ containing a value of this type.
         public static final int abc_textfield_searchview_holo_light=0x7f020054;
         public static final int abc_textfield_searchview_right_holo_dark=0x7f020055;
         public static final int abc_textfield_searchview_right_holo_light=0x7f020056;
-        public static final int cute_text_edit=0x7f020057;
-        public static final int ic_launcher=0x7f020058;
-        public static final int pretty_button=0x7f020059;
+        public static final int bad_box=0x7f020057;
+        public static final int bad_button=0x7f020058;
+        public static final int cute_text_edit=0x7f020059;
+        public static final int ic_launcher=0x7f02005a;
+        public static final int pretty_button=0x7f02005b;
     }
     public static final class id {
         public static final int action_bar=0x7f06001c;
@@ -1240,12 +1242,13 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f060016;
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060024;
-        public static final int action_settings=0x7f060047;
+        public static final int action_settings=0x7f060048;
         public static final int activity_chooser_view_content=0x7f060025;
         public static final int always=0x7f06000b;
         public static final int beginning=0x7f060011;
         public static final int checkbox=0x7f06002d;
         public static final int collapseActionView=0x7f06000d;
+        public static final int datePickerB=0x7f060043;
         public static final int default_activity_button=0x7f060028;
         public static final int dialog=0x7f06000e;
         public static final int disableHome=0x7f060008;
@@ -1261,11 +1264,11 @@ containing a value of this type.
         public static final int icon=0x7f06002a;
         public static final int ifRoom=0x7f06000a;
         public static final int image=0x7f060027;
-        public static final int incEventInfo=0x7f060044;
+        public static final int incEventInfo=0x7f060045;
         public static final int incEventLocation=0x7f060040;
         public static final int incEventName=0x7f06003e;
         public static final int incOrgNameForm=0x7f06003f;
-        public static final int incTags=0x7f060043;
+        public static final int incTags=0x7f060044;
         public static final int listMode=0x7f060001;
         public static final int list_item=0x7f060029;
         public static final int middle=0x7f060012;
@@ -1292,8 +1295,8 @@ containing a value of this type.
         public static final int showTitle=0x7f060006;
         public static final int split_action_bar=0x7f06001e;
         public static final int studentButton=0x7f06003d;
-        public static final int submitButton=0x7f060046;
-        public static final int submitMessageBrother=0x7f060045;
+        public static final int submitButton=0x7f060047;
+        public static final int submitMessageBrother=0x7f060046;
         public static final int submit_area=0x7f060039;
         public static final int tabMode=0x7f060002;
         public static final int title=0x7f06002b;
@@ -1405,6 +1408,7 @@ containing a value of this type.
         public static final int abc_shareactionprovider_share_with_application=0x7f0b000b;
         public static final int action_settings=0x7f0b000f;
         public static final int app_name=0x7f0b000d;
+        public static final int datePickerButton=0x7f0b001e;
         public static final int endTimeButton=0x7f0b0019;
         public static final int eventInfo=0x7f0b001b;
         public static final int eventLocHint=0x7f0b0017;
@@ -1413,34 +1417,34 @@ containing a value of this type.
         public static final int orgButtonString=0x7f0b0011;
         public static final int orgName=0x7f0b0010;
         public static final int orgSettingSummary=0x7f0b0015;
-        public static final int pref_default_display_name=0x7f0b0023;
-        public static final int pref_description_social_recommendations=0x7f0b0021;
+        public static final int pref_default_display_name=0x7f0b0024;
+        public static final int pref_description_social_recommendations=0x7f0b0022;
         /**  Example settings for Data & Sync 
          */
-        public static final int pref_header_data_sync=0x7f0b0025;
+        public static final int pref_header_data_sync=0x7f0b0026;
         /**  Strings related to Settings 
  Example General settings 
          */
-        public static final int pref_header_general=0x7f0b001f;
+        public static final int pref_header_general=0x7f0b0020;
         /**  Example settings for Notifications 
          */
-        public static final int pref_header_notifications=0x7f0b0028;
-        public static final int pref_ringtone_silent=0x7f0b002b;
-        public static final int pref_title_add_friends_to_messages=0x7f0b0024;
-        public static final int pref_title_display_name=0x7f0b0022;
-        public static final int pref_title_new_message_notifications=0x7f0b0029;
-        public static final int pref_title_ringtone=0x7f0b002a;
-        public static final int pref_title_social_recommendations=0x7f0b0020;
-        public static final int pref_title_sync_frequency=0x7f0b0026;
-        public static final int pref_title_system_sync_settings=0x7f0b0027;
-        public static final int pref_title_vibrate=0x7f0b002c;
+        public static final int pref_header_notifications=0x7f0b0029;
+        public static final int pref_ringtone_silent=0x7f0b002c;
+        public static final int pref_title_add_friends_to_messages=0x7f0b0025;
+        public static final int pref_title_display_name=0x7f0b0023;
+        public static final int pref_title_new_message_notifications=0x7f0b002a;
+        public static final int pref_title_ringtone=0x7f0b002b;
+        public static final int pref_title_social_recommendations=0x7f0b0021;
+        public static final int pref_title_sync_frequency=0x7f0b0027;
+        public static final int pref_title_system_sync_settings=0x7f0b0028;
+        public static final int pref_title_vibrate=0x7f0b002d;
         public static final int startTimeButton=0x7f0b0018;
         public static final int stuButtonString=0x7f0b0012;
         public static final int submitButtonText=0x7f0b001c;
         public static final int submitMessage=0x7f0b001d;
         public static final int tagHint=0x7f0b001a;
         public static final int title_activity_organization_form=0x7f0b0013;
-        public static final int title_activity_settings=0x7f0b001e;
+        public static final int title_activity_settings=0x7f0b001f;
         public static final int title_activity_student=0x7f0b0014;
     }
     public static final class style {
