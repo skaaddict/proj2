@@ -1,11 +1,18 @@
 package com.example.umbcevents;
 
+import java.util.Calendar;
+
 import android.support.v7.app.ActionBarActivity;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class OrganizationForm extends ActionBarActivity {
 
@@ -17,6 +24,8 @@ public class OrganizationForm extends ActionBarActivity {
 	Button BstartTime;
 	Button BendTime;
 	Button Bsubmit;
+	
+	int startHour = -1, startMinute =-1, finishHour =-1, finishMinute =-1;
 	
 	
 	
@@ -33,8 +42,88 @@ public class OrganizationForm extends ActionBarActivity {
 		BendTime = (Button) findViewById(R.id.enterFinishTime);
 		Bsubmit = (Button) findViewById(R.id.submitButton);
 		
+		//Set up button listeners....
+		BstartTime.setOnClickListener( new OnClickListener() {
+
+            public void onClick(View v) {
+                // TODO Do button things.
+            	createStartClock();
+            	
+            }
+        });
 		
+		BendTime.setOnClickListener( new OnClickListener() {
+
+            public void onClick(View v) {
+                // TODO Do button things.
+            	createEndClock();
+            	
+            }
+        });
 		
+		Bsubmit.setOnClickListener( new OnClickListener() {
+
+            public void onClick(View v) {
+                // TODO Do button things.
+            	submitNonsense();
+            	
+            }
+        });
+		
+	}
+
+	protected void submitNonsense() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void createEndClock() {
+		// TODO Auto-generated method stub
+        Calendar mcurrentTime = Calendar.getInstance();
+        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+        int minute = mcurrentTime.get(Calendar.MINUTE);
+        TimePickerDialog mTimePicker;
+        mTimePicker = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            
+        	int count = 0;
+        	
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+            	 if(count == 1){
+                 	finishHour = selectedHour;
+                 	finishMinute = selectedMinute;
+                 }
+                 count++;
+            }
+        }, hour, minute, true);//Yes 24 hour time
+        mTimePicker.setTitle("Select Time");
+        mTimePicker.show();
+	}
+
+	protected void createStartClock() {
+		// TODO Auto-generated method stub
+        Calendar mcurrentTime = Calendar.getInstance();
+        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+        int minute = mcurrentTime.get(Calendar.MINUTE);
+        TimePickerDialog mTimePicker;
+        mTimePicker = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            
+            int count = 0;
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                if(count == 1){
+                	startHour = selectedHour;
+                	startMinute = selectedMinute;
+                }
+                count++;
+            }
+            
+        }, hour, minute, true);//Yes 24 hour time
+        mTimePicker.setTitle("Select Time");
+        mTimePicker.show();
+	}
+
+	protected void debugToast() {
+		// TODO Auto-generated method stub
+		Toast.makeText(this, "yay!", Toast.LENGTH_LONG).show();
 	}
 
 	@Override
