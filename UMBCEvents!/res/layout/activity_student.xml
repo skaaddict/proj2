@@ -8,7 +8,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.umbcevents.StudentActivity" >
 
+    <ListView
+        android:id="@id/android:list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    
-    
 </LinearLayout>

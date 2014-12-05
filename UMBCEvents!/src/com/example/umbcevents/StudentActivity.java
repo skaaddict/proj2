@@ -1,6 +1,7 @@
 package com.example.umbcevents;
 
 import android.support.v7.app.ActionBarActivity;
+import android.app.ListActivity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
 
-public class StudentActivity extends ActionBarActivity {
+public class StudentActivity extends ListActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
