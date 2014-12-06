@@ -11,7 +11,7 @@
         android:padding="11dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
         android:inputType="textPersonName" >
         <requestFocus />
@@ -25,17 +25,27 @@
         android:padding="11dp"
         android:layout_below="@+id/editText1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
         android:inputType="textPersonName" />
  
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="11dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Insert" />
+        android:text="Submit Event" />
+
+    <Button
+        android:id="@+id/selectButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/submitButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:padding="11dp"
+        android:text="Select" />
  
 </RelativeLayout>
