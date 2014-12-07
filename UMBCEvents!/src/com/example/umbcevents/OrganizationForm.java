@@ -98,9 +98,21 @@ public class OrganizationForm extends ActionBarActivity {
 	protected void createDatePicker() {
 		// TODO Auto-generated method stub
 		Calendar mcurrentTime = Calendar.getInstance();
-		int day = mcurrentTime.get(Calendar.DAY_OF_MONTH);
-		int month = mcurrentTime.get(Calendar.MONTH);
-		int year = mcurrentTime.get(Calendar.YEAR);
+		
+		
+		
+		int day;
+		if(eventDay == -1) { day = mcurrentTime.get(Calendar.DAY_OF_MONTH); }
+		else {day = eventDay; }
+		int month;
+		if(eventMonth == -1) { month = mcurrentTime.get(Calendar.MONTH);}
+		else {month = eventMonth; }
+		int year;
+		if(eventYear == -1) { year = mcurrentTime.get(Calendar.YEAR); }
+		else {year = eventYear; }
+		
+		
+		
 		DatePickerDialog mDatePicker;
 		mDatePicker = new DatePickerDialog(this,
 				new DatePickerDialog.OnDateSetListener() {
@@ -342,8 +354,12 @@ public class OrganizationForm extends ActionBarActivity {
 	protected void createEndClock() {
 		// TODO Auto-generated method stub
 		Calendar mcurrentTime = Calendar.getInstance();
-		int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-		int minute = mcurrentTime.get(Calendar.MINUTE);
+		int hour;
+		if(finishHour == -1){ hour = mcurrentTime.get(Calendar.HOUR_OF_DAY); }
+		else {hour = finishHour; }
+		int minute;
+		if(finishMinute == -1){ minute = mcurrentTime.get(Calendar.MINUTE); }
+		else {minute = finishMinute; }
 		TimePickerDialog mTimePicker;
 		mTimePicker = new TimePickerDialog(this,
 				new TimePickerDialog.OnTimeSetListener() {
@@ -366,8 +382,12 @@ public class OrganizationForm extends ActionBarActivity {
 	protected void createStartClock() {
 		// TODO Auto-generated method stub
 		Calendar mcurrentTime = Calendar.getInstance();
-		int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-		int minute = mcurrentTime.get(Calendar.MINUTE);
+		int hour;
+		if(startHour == -1){ hour = mcurrentTime.get(Calendar.HOUR_OF_DAY); }
+		else {hour = startHour; }
+		int minute;
+		if(startMinute == -1) { minute = mcurrentTime.get(Calendar.MINUTE); }
+		else {minute = startMinute; }
 		TimePickerDialog mTimePicker;
 		mTimePicker = new TimePickerDialog(this,
 				new TimePickerDialog.OnTimeSetListener() {
