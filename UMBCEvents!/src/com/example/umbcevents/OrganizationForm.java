@@ -318,7 +318,7 @@ public class OrganizationForm extends ActionBarActivity {
 	   
 	       .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) { 
-	            // continue with delete
+	            // continue with delete yeah
 	        }
 	     })
 	    .setIcon(android.R.drawable.ic_menu_info_details)
