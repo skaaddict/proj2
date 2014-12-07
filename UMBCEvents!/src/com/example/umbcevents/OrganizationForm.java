@@ -335,6 +335,8 @@ public class OrganizationForm extends ActionBarActivity {
 		
 		new InsertTask(getBaseContext()).execute(messageOrgName, messageEventName, messageEventLocation,
 				start_time, end_time, messageTags, messageExtraInfo);
+		finish();
+		
 	}
 
 	protected void createEndClock() {

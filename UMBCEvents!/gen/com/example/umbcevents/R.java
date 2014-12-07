@@ -1226,9 +1226,10 @@ containing a value of this type.
         public static final int abc_textfield_searchview_right_holo_light=0x7f020056;
         public static final int bad_box=0x7f020057;
         public static final int bad_button=0x7f020058;
-        public static final int cute_text_edit=0x7f020059;
-        public static final int ic_launcher=0x7f02005a;
-        public static final int pretty_button=0x7f02005b;
+        public static final int better_cursor=0x7f020059;
+        public static final int cute_text_edit=0x7f02005a;
+        public static final int ic_launcher=0x7f02005b;
+        public static final int pretty_button=0x7f02005c;
     }
     public static final class id {
         public static final int action_bar=0x7f06001c;

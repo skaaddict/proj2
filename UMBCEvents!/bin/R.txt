@@ -381,9 +381,10 @@ int drawable abc_textfield_searchview_right_holo_dark 0x7f020055
 int drawable abc_textfield_searchview_right_holo_light 0x7f020056
 int drawable bad_box 0x7f020057
 int drawable bad_button 0x7f020058
-int drawable cute_text_edit 0x7f020059
-int drawable ic_launcher 0x7f02005a
-int drawable pretty_button 0x7f02005b
+int drawable better_cursor 0x7f020059
+int drawable cute_text_edit 0x7f02005a
+int drawable ic_launcher 0x7f02005b
+int drawable pretty_button 0x7f02005c
 int id action_bar 0x7f06001c
 int id action_bar_activity_content 0x7f060015
 int id action_bar_container 0x7f06001b

@@ -23,6 +23,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
+        android:textCursorDrawable="@drawable/better_cursor"
         />
 
     <EditText
@@ -33,7 +34,8 @@
         android:hint="Organization Name" 
         android:background="@drawable/cute_text_edit"
         android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:textCursorDrawable="@drawable/better_cursor"/>
 
     <EditText
         android:id="@+id/incEventLocation"
@@ -43,7 +45,8 @@
         android:hint="@string/eventLocHint" 
         android:background="@drawable/cute_text_edit"
         android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:textCursorDrawable="@drawable/better_cursor"/>
 
     <Button
         android:id="@+id/enterStartTime"
@@ -87,7 +90,8 @@
         android:background="@drawable/cute_text_edit"
      
         android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:textCursorDrawable="@drawable/better_cursor"/>
 
     <EditText
         android:id="@+id/incEventInfo"
@@ -97,7 +101,8 @@
         android:hint="@string/eventInfo" 
         android:background="@drawable/cute_text_edit"
         android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:textCursorDrawable="@drawable/better_cursor"/>
 
     <TextView
         android:id="@+id/submitMessageBrother"
