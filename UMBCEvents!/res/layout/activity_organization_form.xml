@@ -15,8 +15,8 @@
     
     <EditText
         android:id="@+id/incEventName"
-        android:layout_width="550dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
        	android:ellipsize="start"
         android:hint="@string/eventNameHint" 
         android:background="@drawable/cute_text_edit"
@@ -28,8 +28,8 @@
 
     <EditText
         android:id="@+id/incOrgNameForm"
-        android:layout_width="550dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
        android:layout_gravity="center"
         android:hint="Organization Name" 
         android:background="@drawable/cute_text_edit"
@@ -39,8 +39,8 @@
 
     <EditText
         android:id="@+id/incEventLocation"
-        android:layout_width="550dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:hint="@string/eventLocHint" 
         android:background="@drawable/cute_text_edit"
@@ -50,8 +50,8 @@
 
     <Button
         android:id="@+id/enterStartTime"
-        android:layout_width="425dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/startTimeButton" 
         android:textColor="@color/Silver"
         android:layout_gravity="center"
@@ -61,8 +61,8 @@
 
     <Button
         android:id="@+id/enterFinishTime"
-        android:layout_width="425dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/endTimeButton"
         android:textColor="@color/Silver"
         android:layout_gravity="center"
@@ -72,8 +72,8 @@
     
     <Button
         android:id="@+id/datePickerB"
-        android:layout_width="425dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/datePickerButton"
         android:textColor="@color/Silver"
         android:layout_gravity="center"
@@ -83,8 +83,8 @@
 
     <EditText
         android:id="@+id/incTags"
-        android:layout_width="550dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:hint="@string/tagHint" 
         android:background="@drawable/cute_text_edit"
@@ -95,8 +95,8 @@
 
     <EditText
         android:id="@+id/incEventInfo"
-        android:layout_width="550dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:hint="@string/eventInfo" 
         android:background="@drawable/cute_text_edit"
@@ -114,8 +114,8 @@
     
         <Button
         android:id="@+id/submitButton"
-        android:layout_width="550dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/submitButtonText" 
         android:textColor="@color/Silver"
         android:layout_gravity="center"
