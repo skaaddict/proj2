@@ -2,6 +2,8 @@ package com.example.umbcevents;
 
 import java.util.Calendar;
 
+
+
 import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -20,15 +22,21 @@ import android.widget.Toast;
 
 public class OrganizationForm extends ActionBarActivity {
 
-	EditText ETEventName;
-	EditText ETOrgName;
-	EditText ETEventLocation;
-	EditText ETTages;
-	EditText ETExtraInfo;
-	Button BstartTime;
-	Button BendTime;
-	Button Bsubmit;
-	Button BDatePicker;
+	private EditText ETEventName;
+	private EditText ETOrgName;
+	private EditText ETEventLocation;
+	private EditText ETTages;
+	private EditText ETExtraInfo;
+	private Button BstartTime;
+	private Button BendTime;
+	private Button Bsubmit;
+	private Button BDatePicker;
+	
+	private String messageEventName;
+	private String messageOrgName;
+	private String messageEventLocation;
+	private String messageTags;
+	private String messageExtraInfo;
 
 	int eventDay = -1, eventMonth = -1, eventYear = -1;
 
@@ -320,6 +328,13 @@ public class OrganizationForm extends ActionBarActivity {
 	protected void submitForm() {
 		// TODO Auto-generated method stub
 		debugToast("Submitting form");
+		
+		String start_time = eventYear + "-" + eventMonth + "-" + eventDay + " " + startHour + ":" + startMinute + ":00";
+		String end_time = eventYear + "-" + eventMonth + "-" + eventDay + " " + finishHour + ":" + finishMinute + ":00";
+		
+		
+		new InsertTask(getBaseContext()).execute(messageOrgName, messageEventName, messageEventLocation,
+				start_time, end_time, messageTags, messageExtraInfo);
 	}
 
 	protected void createEndClock() {
