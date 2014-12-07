@@ -15,7 +15,7 @@
     <string name="startTimeButton">Enter Start Time!</string>
     <string name="endTimeButton">Enter End time!</string>
     <string name="tagHint">Tags (comma separated)</string>
-    <string name="eventInfo">Extra Info About the Event</string>
+    <string name="eventInfo">Event Description</string>
     <string name="submitButtonText">Submit</string>
     <string name="submitMessage">After filling in all the information, 
         click the submit button.</string>
