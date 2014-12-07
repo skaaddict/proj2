@@ -123,7 +123,7 @@ public class OrganizationForm extends ActionBarActivity {
 					public void onDateSet(DatePicker view, int year,
 							int monthOfYear, int dayOfMonth) {
 						// TODO Auto-generated method stub
-						if (counter == 1) {
+						if (counter == 0  ) {
 							eventDay = dayOfMonth;
 							eventMonth = monthOfYear + 1;
 							eventYear = year;
@@ -145,11 +145,11 @@ public class OrganizationForm extends ActionBarActivity {
 		String errorMessage = "The following fields have not been filled out:\n";
 		String successMessage = "Your form:\n";
 		// Need to check all the categories, if they aren't filled in tell user.
-		String messageEventName = ETEventName.getText().toString();
-		String messageOrgName = ETOrgName.getText().toString();
-		String messageEventLocation = ETEventLocation.getText().toString();
-		String messageTags = ETTages.getText().toString();
-		String messageExtraInfo = ETExtraInfo.getText().toString();
+		messageEventName = ETEventName.getText().toString();
+		messageOrgName = ETOrgName.getText().toString();
+		messageEventLocation = ETEventLocation.getText().toString();
+		messageTags = ETTages.getText().toString();
+		messageExtraInfo = ETExtraInfo.getText().toString();
 
 		boolean eventNameGood = false;
 		boolean orgNameGood = false;
@@ -368,7 +368,7 @@ public class OrganizationForm extends ActionBarActivity {
 
 					public void onTimeSet(TimePicker timePicker,
 							int selectedHour, int selectedMinute) {
-						if (count == 1) {
+						if (count == 0) {
 							finishHour = selectedHour;
 							finishMinute = selectedMinute;
 						}
@@ -396,7 +396,7 @@ public class OrganizationForm extends ActionBarActivity {
 
 					public void onTimeSet(TimePicker timePicker,
 							int selectedHour, int selectedMinute) {
-						if (count == 1) {
+						if (count == 0) {
 							startHour = selectedHour;
 							startMinute = selectedMinute;
 						}
