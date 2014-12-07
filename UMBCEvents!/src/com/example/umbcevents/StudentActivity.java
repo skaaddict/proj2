@@ -1,5 +1,7 @@
 package com.example.umbcevents;
 
+import java.util.ArrayList;
+
 import android.support.v7.app.ActionBarActivity;
 import android.app.ListActivity;
 import android.app.SearchManager;
@@ -8,25 +10,47 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.SearchView;
 
 public class StudentActivity extends ListActivity {
 
+	private ArrayList<String> listItems=new ArrayList<String>();
+	
+	ArrayAdapter<String> adapter;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_student);
+		 adapter=new ArrayAdapter<String>(this,
+	              android.R.layout.simple_list_item_1,
+	              listItems);
+	          setListAdapter(adapter);
 	    // Get the intent, verify the action and get the query
 	    Intent intent = getIntent();
 	    if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 	      String query = intent.getStringExtra(SearchManager.QUERY);
 	      doMySearch(query);
+	 
 	    }
+	    
 	}
 
+	 protected void onNewIntent(Intent theIntent){
+		 
+		    if (Intent.ACTION_SEARCH.equals(theIntent.getAction())) {
+		      String query = theIntent.getStringExtra(SearchManager.QUERY);
+		      doMySearch(query);
+		 
+		    }
+	}
+	
 	private void doMySearch(String query) {
 		// TODO Auto-generated method stub
 		
+		listItems.add(query);
+		adapter.notifyDataSetChanged();
 	}
 
 	@Override
