@@ -259,19 +259,18 @@ public class EventStruct implements Comparable<EventStruct>{
 	public String toString(){
 		String eventString = "";
 		
-		eventString += "Event:        " + this.getEventName() + "\n";
-		eventString += "Organization: " + this.getOrg() + "\n";
-		eventString += "Location:     " + this.getLocation() + "\n";
-		eventString += "Start time:   " + sdf.format(eventStart.getTime()) + "\n";
-		eventString += "End Time:     " + sdf.format(eventEnd.getTime()) + "\n";
-		eventString += "Description:  " + this.getDescription() + "\n";
-		eventString += "Tags:         ";
-		for(int i = 0; i < tagsArray.size(); i ++){
-			eventString += tagsArray.get(i);
-			if(i < (tagsArray.size()-1)){
-				eventString += ", ";
-			}
-		}
+		eventString += this.getEventName() + ", hosted by " + this.getOrg() +"\n";
+		eventString += "From " + this.sdf.format(eventStart.getTime()) + 
+				" until " + this.sdf.format(eventEnd.getTime()) + "\n";
+		eventString += "Located at: " + this.getLocation() + "\n";
+		eventString += "\"" + this.getDescription() + "\"\n";
+//		eventString += "Tags:         ";
+//		for(int i = 0; i < tagsArray.size(); i ++){
+//			eventString += tagsArray.get(i);
+//			if(i < (tagsArray.size()-1)){
+//				eventString += ", ";
+//			}
+//		}
 		
 		
 		return eventString;

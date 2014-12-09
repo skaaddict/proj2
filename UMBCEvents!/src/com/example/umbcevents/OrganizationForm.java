@@ -130,6 +130,7 @@ public class OrganizationForm extends ActionBarActivity {
 							eventDay = dayOfMonth;
 							eventMonth = monthOfYear + 1;
 							eventYear = year;
+							BDatePicker.setText(eventMonth + "/" + eventDay + "/" + eventYear);
 						}
 						counter++;
 					}
@@ -385,7 +386,8 @@ public class OrganizationForm extends ActionBarActivity {
 						if (count == 0) {
 							finishHour = selectedHour;
 							finishMinute = selectedMinute;
-						}
+							BendTime.setText(selectedHour + ":" + selectedMinute);
+						}  
 						count++;
 					}
 				}, hour, minute, true);// Yes 24 hour time
@@ -419,6 +421,7 @@ public class OrganizationForm extends ActionBarActivity {
 						if (count == 0) {
 							startHour = selectedHour;
 							startMinute = selectedMinute;
+							BstartTime.setText(selectedHour + ":" + selectedMinute);
 						}
 						count++;
 					}

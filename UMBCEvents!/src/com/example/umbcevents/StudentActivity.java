@@ -82,6 +82,7 @@ public class StudentActivity extends ListActivity implements OnRefreshListener {
 		for (int i = 0; i < events.size(); i++) {
 			String toAdd = events.get(i).toString();
 			listItems.add(toAdd);
+			
 
 		}
 		listItems.add("\n");
@@ -319,7 +320,7 @@ public class StudentActivity extends ListActivity implements OnRefreshListener {
 				mSwipeRefreshLayout.setRefreshing(false);
 				doMySearch(lastSearch);
 			} else if (fromRefresh) {
-
+				mSwipeRefreshLayout.setRefreshing(false);
 				setList();
 			} else {
 				lastSearch = "";

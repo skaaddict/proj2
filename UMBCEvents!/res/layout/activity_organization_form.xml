@@ -1,126 +1,130 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.umbcevents.OrganizationForm" 
-    android:background="@color/Gold">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+     android:background="@color/Gold" >
 
-    
-    
-    
-    <EditText
-        android:id="@+id/incEventName"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       	android:ellipsize="start"
-        android:hint="@string/eventNameHint" 
-        android:background="@drawable/cute_text_edit"
-        android:layout_gravity="center"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:textCursorDrawable="@drawable/better_cursor"
-        />
+       
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <EditText
-        android:id="@+id/incOrgNameForm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-       android:layout_gravity="center"
-        android:hint="Organization Name" 
-        android:background="@drawable/cute_text_edit"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:textCursorDrawable="@drawable/better_cursor"/>
+        <EditText
+            android:id="@+id/incEventName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/cute_text_edit"
+            android:ellipsize="start"
+            android:hint="@string/eventNameHint"
+            android:textCursorDrawable="@drawable/better_cursor"
+            android:maxLength="63" />
 
-    <EditText
-        android:id="@+id/incEventLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:hint="@string/eventLocHint" 
-        android:background="@drawable/cute_text_edit"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:textCursorDrawable="@drawable/better_cursor"/>
+        <EditText
+            android:id="@+id/incOrgNameForm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/cute_text_edit"
+            android:hint="Organization Name"
+            android:textCursorDrawable="@drawable/better_cursor"
+             android:maxLength="63" />
 
-    <Button
-        android:id="@+id/enterStartTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/startTimeButton" 
-        android:textColor="@color/Silver"
-        android:layout_gravity="center"
-        android:background="@drawable/pretty_button"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"/>
+        <EditText
+            android:id="@+id/incEventLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/cute_text_edit"
+            android:hint="@string/eventLocHint"
+            android:textCursorDrawable="@drawable/better_cursor"
+             android:maxLength="63" />
 
-    <Button
-        android:id="@+id/enterFinishTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/endTimeButton"
-        android:textColor="@color/Silver"
-        android:layout_gravity="center"
-        android:background="@drawable/pretty_button"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp" />
-    
-    <Button
-        android:id="@+id/datePickerB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/datePickerButton"
-        android:textColor="@color/Silver"
-        android:layout_gravity="center"
-        android:background="@drawable/pretty_button"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp" />
-
-    <EditText
-        android:id="@+id/incTags"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:hint="@string/tagHint" 
-        android:background="@drawable/cute_text_edit"
-     
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:textCursorDrawable="@drawable/better_cursor"/>
-
-    <EditText
-        android:id="@+id/incEventInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:hint="@string/eventInfo" 
-        android:background="@drawable/cute_text_edit"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:textCursorDrawable="@drawable/better_cursor"/>
-
-    <TextView
-        android:id="@+id/submitMessageBrother"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/submitMessage"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="25dp" />
-    
         <Button
-        android:id="@+id/submitButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/submitButtonText" 
-        android:textColor="@color/Silver"
-        android:layout_gravity="center"
-        android:background="@drawable/pretty_button"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"/>
+            android:id="@+id/enterStartTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/pretty_button"
+            android:text="@string/startTimeButton"
+            android:textColor="@color/Silver" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/enterFinishTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/pretty_button"
+            android:text="@string/endTimeButton"
+            android:textColor="@color/Silver" />
+
+        <Button
+            android:id="@+id/datePickerB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/pretty_button"
+            android:text="@string/datePickerButton"
+            android:textColor="@color/Silver" />
+
+        <EditText
+            android:id="@+id/incTags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/cute_text_edit"
+            android:hint="@string/tagHint"
+            android:textCursorDrawable="@drawable/better_cursor"
+             android:maxLength="255" />
+
+        <EditText
+            android:id="@+id/incEventInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/cute_text_edit"
+            android:hint="@string/eventInfo"
+            android:textCursorDrawable="@drawable/better_cursor"
+             android:maxLength="140" />
+
+        <TextView
+            android:id="@+id/submitMessageBrother"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/submitMessage" />
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/pretty_button"
+            android:text="@string/submitButtonText"
+            android:textColor="@color/Silver" />
+    </LinearLayout>
+
+</ScrollView>
