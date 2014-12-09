@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -15,33 +16,32 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		
-		
-		//Create button listeners for navigation to organization and student activities.
-     
-        Button orgButton = (Button) findViewById(R.id.organizationButton);
-        orgButton.setOnClickListener( new OnClickListener() {
 
-                    public void onClick(View v) {
-                        // TODO Auto-generated method stub
-                        //Go to orginization.
-                    	headToOrgForm();
-                    	
-                    }
-                });
-        
-        Button stuButton = (Button) findViewById(R.id.studentButton);
-        stuButton.setOnClickListener( new OnClickListener() {
+		// Create button listeners for navigation to organization and student
+		// activities.
 
-                    public void onClick(View v) {
-                        // TODO Auto-generated method stub
-                        //Go to orginization.
-                    	headToStudentActivity();
-                    	
-                    }
-                });
-		
+		Button orgButton = (Button) findViewById(R.id.organizationButton);
+		orgButton.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				// Go to orginization.
+				headToOrgForm();
+
+			}
+		});
+
+		Button stuButton = (Button) findViewById(R.id.studentButton);
+		stuButton.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				// Go to orginization.
+				headToStudentActivity();
+
+			}
+		});
+
 	}
 
 	protected void headToOrgForm() {
@@ -49,8 +49,9 @@ public class MainActivity extends ActionBarActivity {
 		Intent intent = new Intent(this, OrganizationForm.class);
 		startActivity(intent);
 	}
-	
-	protected void headToStudentActivity(){
+
+	protected void headToStudentActivity() {
+		Toast.makeText(this, "Loading events...", Toast.LENGTH_SHORT).show();
 		Intent intent = new Intent(this, StudentActivity.class);
 		startActivity(intent);
 	}
@@ -68,14 +69,14 @@ public class MainActivity extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings){
+		if (id == R.id.action_settings) {
 			goToSettings();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	private void goToSettings(){
+
+	private void goToSettings() {
 		Intent intent = new Intent(this, SettingsActivity.class);
 		startActivity(intent);
 	}

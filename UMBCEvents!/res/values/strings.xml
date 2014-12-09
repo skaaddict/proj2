@@ -22,5 +22,7 @@
     <string name="datePickerButton">Enter a date for you event!</string>
     <string name="search_hint">Search Events</string>
     <string name="search">Search</string>
+    <string name="helpInfo">Help</string>
+    <string name="resetInfo">Reset</string>
         
 </resources>

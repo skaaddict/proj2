@@ -2,8 +2,6 @@ package com.example.umbcevents;
 
 import java.util.Calendar;
 
-
-
 import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -31,7 +29,7 @@ public class OrganizationForm extends ActionBarActivity {
 	private Button BendTime;
 	private Button Bsubmit;
 	private Button BDatePicker;
-	
+
 	private String messageEventName;
 	private String messageOrgName;
 	private String messageEventLocation;
@@ -98,21 +96,26 @@ public class OrganizationForm extends ActionBarActivity {
 	protected void createDatePicker() {
 		// TODO Auto-generated method stub
 		Calendar mcurrentTime = Calendar.getInstance();
-		
-		
-		
+
 		int day;
-		if(eventDay == -1) { day = mcurrentTime.get(Calendar.DAY_OF_MONTH); }
-		else {day = eventDay; }
+		if (eventDay == -1) {
+			day = mcurrentTime.get(Calendar.DAY_OF_MONTH);
+		} else {
+			day = eventDay;
+		}
 		int month;
-		if(eventMonth == -1) { month = mcurrentTime.get(Calendar.MONTH);}
-		else {month = eventMonth; }
+		if (eventMonth == -1) {
+			month = mcurrentTime.get(Calendar.MONTH);
+		} else {
+			month = eventMonth;
+		}
 		int year;
-		if(eventYear == -1) { year = mcurrentTime.get(Calendar.YEAR); }
-		else {year = eventYear; }
-		
-		
-		
+		if (eventYear == -1) {
+			year = mcurrentTime.get(Calendar.YEAR);
+		} else {
+			year = eventYear;
+		}
+
 		DatePickerDialog mDatePicker;
 		mDatePicker = new DatePickerDialog(this,
 				new DatePickerDialog.OnDateSetListener() {
@@ -123,7 +126,7 @@ public class OrganizationForm extends ActionBarActivity {
 					public void onDateSet(DatePicker view, int year,
 							int monthOfYear, int dayOfMonth) {
 						// TODO Auto-generated method stub
-						if (counter == 0  ) {
+						if (counter == 0) {
 							eventDay = dayOfMonth;
 							eventMonth = monthOfYear + 1;
 							eventYear = year;
@@ -135,10 +138,6 @@ public class OrganizationForm extends ActionBarActivity {
 		mDatePicker.show();
 	}
 
-	
-	
-	
-	
 	protected void submitNonsense() {
 		// TODO Auto-generated method stub
 		boolean canWeSubmit = false;
@@ -198,7 +197,7 @@ public class OrganizationForm extends ActionBarActivity {
 
 		}
 
-		if (!messageTags.equals("") && !messageTags.contains(" ")) {
+		if (!messageTags.equals("")) {
 			tagsGood = true;
 			ETTages.setBackground(getResources().getDrawable(
 					R.drawable.cute_text_edit));
@@ -206,11 +205,9 @@ public class OrganizationForm extends ActionBarActivity {
 		} else {
 			ETTages.setBackground(getResources()
 					.getDrawable(R.drawable.bad_box));
-			if (messageTags.contains(" ")) {
-				errorMessage += "-Your tags contained spaces, please remove them.\n";
-			} else {
-				errorMessage += "-Your event did not specify any tags.\n";
-			}
+
+			errorMessage += "-Your event did not specify any tags.\n";
+
 		}
 
 		if (!messageExtraInfo.equals("")) {
@@ -236,8 +233,8 @@ public class OrganizationForm extends ActionBarActivity {
 					R.drawable.bad_button));
 			errorMessage += "You didn't specify a start time for your event.\n";
 		}
-		
-		if(finishHour != -1 && finishMinute != -1){
+
+		if (finishHour != -1 && finishMinute != -1) {
 			endTimeGood = true;
 			BendTime.setBackground(getResources().getDrawable(
 					R.drawable.pretty_button));
@@ -246,32 +243,34 @@ public class OrganizationForm extends ActionBarActivity {
 					R.drawable.bad_button));
 			errorMessage += "You didn't specify an end time! If the event doesn't have one, simply put 23:59.\n";
 		}
-		
-		if(startTimeGood && endTimeGood){
-			//Check to make sure start time is before end time.
-			if(startHour < finishHour){
+
+		if (startTimeGood && endTimeGood) {
+			// Check to make sure start time is before end time.
+			if (startHour < finishHour) {
 				startStopGood = true;
 				BstartTime.setBackground(getResources().getDrawable(
 						R.drawable.pretty_button));
 				BendTime.setBackground(getResources().getDrawable(
 						R.drawable.pretty_button));
-				successMessage += "Event Start Time: " + startHour + ":" + startMinute + 
-						"\nEvent End Time: " + finishHour + ":" + finishMinute + "\n";
-			} else if (startHour == finishHour && startMinute < finishMinute){
+				successMessage += "Event Start Time: " + startHour + ":"
+						+ startMinute + "\nEvent End Time: " + finishHour + ":"
+						+ finishMinute + "\n";
+			} else if (startHour == finishHour && startMinute < finishMinute) {
 				startStopGood = true;
 				BstartTime.setBackground(getResources().getDrawable(
 						R.drawable.pretty_button));
 				BendTime.setBackground(getResources().getDrawable(
 						R.drawable.pretty_button));
-				successMessage += "Event Start Time: " + startHour + ":" + startMinute + 
-						"\nEvent End Time: " + finishHour + ":" + finishMinute + "\n";
+				successMessage += "Event Start Time: " + startHour + ":"
+						+ startMinute + "\nEvent End Time: " + finishHour + ":"
+						+ finishMinute + "\n";
 			} else {
 				BstartTime.setBackground(getResources().getDrawable(
 						R.drawable.bad_button));
 				BendTime.setBackground(getResources().getDrawable(
 						R.drawable.bad_button));
-				errorMessage += "Your start time is after (or at the same time) as your finish time. Please adjust this " +
-						"accordingly.\n";
+				errorMessage += "Your start time is after (or at the same time) as your finish time. Please adjust this "
+						+ "accordingly.\n";
 			}
 		}
 
@@ -280,7 +279,8 @@ public class OrganizationForm extends ActionBarActivity {
 			dateGood = true;
 			BDatePicker.setBackground(getResources().getDrawable(
 					R.drawable.pretty_button));
-			successMessage += "Event Date: " + eventMonth + "/" + eventDay  + "/" + eventYear + "\n";
+			successMessage += "Event Date: " + eventMonth + "/" + eventDay
+					+ "/" + eventYear + "\n";
 		} else {
 			errorMessage += "You didn't specify a date for your event!";
 			BDatePicker.setBackground(getResources().getDrawable(
@@ -302,64 +302,78 @@ public class OrganizationForm extends ActionBarActivity {
 	private void infoBad(String errorMessage) {
 		// TODO Auto-generated method stub
 		new AlertDialog.Builder(this)
-	    .setTitle("Error!")
-	    .setMessage(errorMessage)
-	    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int which) { 
-	            // continue with delete
-	        }
-	     })
-	   
-	    .setIcon(android.R.drawable.ic_dialog_alert)
-	     .show();
+				.setTitle("Error!")
+				.setMessage(errorMessage)
+				.setPositiveButton(android.R.string.ok,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// continue with delete
+							}
+						})
+
+				.setIcon(android.R.drawable.ic_dialog_alert).show();
 	}
 
 	private void infoGood(String successMessage) {
 		// TODO Auto-generated method stub
 		new AlertDialog.Builder(this)
-	    .setTitle("One last look!" )
-	   
-	    .setMessage( "If everything looks ok, click \"ok\" and we'll submit it! " +
-	    		"If not, simply click \"cancel\" and you can go back and modify your event.\n\n" + successMessage)
-	    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int which) { 
-	            // continue with delete
-	        	submitForm();
-	        }
-	     })
-	   
-	       .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int which) { 
-	            // continue with delete yeah
-	        }
-	     })
-	    .setIcon(android.R.drawable.ic_menu_info_details)
-	     .show();
+				.setTitle("One last look!")
+
+				.setMessage(
+						"If everything looks ok, click \"ok\" and we'll submit it! "
+								+ "If not, simply click \"cancel\" and you can go back and modify your event.\n\n"
+								+ successMessage)
+				.setPositiveButton(android.R.string.ok,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// continue with delete
+								submitForm();
+							}
+						})
+
+				.setNegativeButton(android.R.string.cancel,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// continue with delete yeah
+							}
+						}).setIcon(android.R.drawable.ic_menu_info_details)
+				.show();
 	}
 
 	protected void submitForm() {
 		// TODO Auto-generated method stub
 		debugToast("Submitting form");
-		
-		String start_time = eventYear + "-" + eventMonth + "-" + eventDay + " " + startHour + ":" + startMinute + ":00";
-		String end_time = eventYear + "-" + eventMonth + "-" + eventDay + " " + finishHour + ":" + finishMinute + ":00";
-		
-		
-		new InsertTask(getBaseContext()).execute(messageOrgName, messageEventName, messageEventLocation,
-				start_time, end_time, messageTags, messageExtraInfo);
+
+		String start_time = eventYear + "-" + eventMonth + "-" + eventDay + " "
+				+ startHour + ":" + startMinute + ":00";
+		String end_time = eventYear + "-" + eventMonth + "-" + eventDay + " "
+				+ finishHour + ":" + finishMinute + ":00";
+
+		new InsertTask(getBaseContext()).execute(messageOrgName,
+				messageEventName, messageEventLocation, start_time, end_time,
+				messageTags, messageExtraInfo);
 		finish();
-		
+
 	}
 
 	protected void createEndClock() {
 		// TODO Auto-generated method stub
 		Calendar mcurrentTime = Calendar.getInstance();
 		int hour;
-		if(finishHour == -1){ hour = mcurrentTime.get(Calendar.HOUR_OF_DAY); }
-		else {hour = finishHour; }
+		if (finishHour == -1) {
+			hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+		} else {
+			hour = finishHour;
+		}
 		int minute;
-		if(finishMinute == -1){ minute = mcurrentTime.get(Calendar.MINUTE); }
-		else {minute = finishMinute; }
+		if (finishMinute == -1) {
+			minute = mcurrentTime.get(Calendar.MINUTE);
+		} else {
+			minute = finishMinute;
+		}
 		TimePickerDialog mTimePicker;
 		mTimePicker = new TimePickerDialog(this,
 				new TimePickerDialog.OnTimeSetListener() {
@@ -383,11 +397,17 @@ public class OrganizationForm extends ActionBarActivity {
 		// TODO Auto-generated method stub
 		Calendar mcurrentTime = Calendar.getInstance();
 		int hour;
-		if(startHour == -1){ hour = mcurrentTime.get(Calendar.HOUR_OF_DAY); }
-		else {hour = startHour; }
+		if (startHour == -1) {
+			hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+		} else {
+			hour = startHour;
+		}
 		int minute;
-		if(startMinute == -1) { minute = mcurrentTime.get(Calendar.MINUTE); }
-		else {minute = startMinute; }
+		if (startMinute == -1) {
+			minute = mcurrentTime.get(Calendar.MINUTE);
+		} else {
+			minute = startMinute;
+		}
 		TimePickerDialog mTimePicker;
 		mTimePicker = new TimePickerDialog(this,
 				new TimePickerDialog.OnTimeSetListener() {

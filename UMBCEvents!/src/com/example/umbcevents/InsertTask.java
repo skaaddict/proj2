@@ -70,7 +70,8 @@ public class InsertTask extends AsyncTask<String, String, Void> {
 			Log.e("pass 1", "connection success ");
 		} catch (Exception e) {
 			Log.e("Fail 1", e.toString());
-			publishProgress("Failed to connect to db: " + e.toString());
+			// publishProgress("Failed to connect to db: " + e.toString());
+			publishProgress("Check internet connection");
 			return null;
 		}
 		try {
@@ -112,7 +113,7 @@ public class InsertTask extends AsyncTask<String, String, Void> {
 
 	@Override
 	protected void onProgressUpdate(String... msg) {
-		if(msg.length > 0){
+		if(msg!= null && msg.length > 0){
 			Toast.makeText(mContext, msg[0], Toast.LENGTH_SHORT).show();
 		}
 	}
