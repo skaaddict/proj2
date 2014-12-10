@@ -386,7 +386,11 @@ public class OrganizationForm extends ActionBarActivity {
 						if (count == 0) {
 							finishHour = selectedHour;
 							finishMinute = selectedMinute;
-							BendTime.setText(selectedHour + ":" + selectedMinute);
+							String newTime = selectedHour + ":";
+							if(selectedMinute == 0) {newTime += "00";}
+							else {newTime += selectedMinute;}
+							
+							BendTime.setText(newTime);
 						}  
 						count++;
 					}
@@ -421,7 +425,11 @@ public class OrganizationForm extends ActionBarActivity {
 						if (count == 0) {
 							startHour = selectedHour;
 							startMinute = selectedMinute;
-							BstartTime.setText(selectedHour + ":" + selectedMinute);
+							String newTime = selectedHour + ":";
+							if(selectedMinute == 0) {newTime += "00";}
+							else {newTime += selectedMinute;}
+							
+							BstartTime.setText(newTime);
 						}
 						count++;
 					}
