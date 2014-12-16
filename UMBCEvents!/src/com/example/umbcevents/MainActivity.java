@@ -10,6 +10,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
+/**
+ * The starting page of the application that allows the user to select which
+ * mode to use.
+ */
 public class MainActivity extends ActionBarActivity {
 
 	@Override
@@ -24,9 +28,8 @@ public class MainActivity extends ActionBarActivity {
 		orgButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				// Go to orginization.
-				headToOrgForm();
+				gotoOrgForm();
 
 			}
 		});
@@ -35,24 +38,26 @@ public class MainActivity extends ActionBarActivity {
 		stuButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				// Go to orginization.
-				headToStudentActivity();
+				// Go to student activity.
+				gotoStudentActivity();
 
 			}
 		});
-
 	}
 
-	protected void headToOrgForm() {
-		// TODO Auto-generated method stub
+	protected void gotoOrgForm() {
 		Intent intent = new Intent(this, OrganizationForm.class);
 		startActivity(intent);
 	}
 
-	protected void headToStudentActivity() {
+	protected void gotoStudentActivity() {
 		Toast.makeText(this, "Loading events...", Toast.LENGTH_SHORT).show();
 		Intent intent = new Intent(this, StudentActivity.class);
+		startActivity(intent);
+	}
+	
+	private void goToSettings() {
+		Intent intent = new Intent(this, SettingsActivity.class);
 		startActivity(intent);
 	}
 
@@ -63,21 +68,18 @@ public class MainActivity extends ActionBarActivity {
 		return true;
 	}
 
-	@Override
+	/**
+	 * Handle action bar item clicks here. The action bar will automatically
+	 * handle clicks on the Home/Up button, so long as you specify a parent
+	 * activity in AndroidManifest.xml.
+	 * @Override
+	 */
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			goToSettings();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	private void goToSettings() {
-		Intent intent = new Intent(this, SettingsActivity.class);
-		startActivity(intent);
 	}
 }

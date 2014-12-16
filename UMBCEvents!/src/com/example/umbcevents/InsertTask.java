@@ -21,7 +21,6 @@ import android.widget.Toast;
 /**
  * An AsyncTask that inserts a new row into the database. Takes string
  * parameters of the data to be inserted into the database.
- * 
  * @author Daniel Smith
  */
 public class InsertTask extends AsyncTask<String, String, Void> {
@@ -30,7 +29,7 @@ public class InsertTask extends AsyncTask<String, String, Void> {
 	private String result = null;
 	private String line = null;
 	private int code;
-	private Context mContext;
+	private Context context;
 
 	private static final String insertSuccessString = "Event successfully created!";
 	private static final String insertFailString = "Event not created.";
@@ -40,7 +39,7 @@ public class InsertTask extends AsyncTask<String, String, Void> {
 	 * @param context - context of the activity that called this task. used to raise toast.
 	 */
     public InsertTask (Context context){
-         mContext = context;
+         this.context = context;
     }
 
 	/**
@@ -114,7 +113,7 @@ public class InsertTask extends AsyncTask<String, String, Void> {
 	@Override
 	protected void onProgressUpdate(String... msg) {
 		if(msg!= null && msg.length > 0){
-			Toast.makeText(mContext, msg[0], Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, msg[0], Toast.LENGTH_SHORT).show();
 		}
 	}
 }

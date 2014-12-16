@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -19,10 +18,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
-import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.SearchManager;
@@ -40,11 +37,12 @@ import android.widget.Toast;
 
 public class StudentActivity extends ListActivity implements OnRefreshListener {
 
-	private ArrayList<EventStruct> events = new ArrayList<EventStruct>();
+	private ArrayList<Event> events = new ArrayList<Event>();
 	private ArrayList<String> listItems = new ArrayList<String>();
-	ArrayAdapter<String> adapter;
+	private ArrayAdapter<String> adapter;
 	private SwipeRefreshLayout mSwipeRefreshLayout;
 	private boolean fromRefresh = false;
+	private boolean greetingMessageShown = false;
 	private String lastSearch = "";
 	private SearchView searchView;
 
@@ -52,10 +50,12 @@ public class StudentActivity extends ListActivity implements OnRefreshListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_student);
-		String myMessage = "Actions: \n\tDrag down on the screen to refresh. " +
-				"\n\tType keywords in search bar  to narrow your results." +
-				"\n\tClick reset in menu to reset the search contents.";
-		showAlert(myMessage);
+		if (!greetingMessageShown) {
+			showAlert("Actions: \n\tDrag down on the screen to refresh. "
+					+ "\n\tType keywords in search bar  to narrow your results."
+					+ "\n\tClick reset in menu to reset the search contents.");
+			greetingMessageShown = true;
+		}
 		mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.container);
 		mSwipeRefreshLayout.setOnRefreshListener(this);
 
@@ -69,28 +69,22 @@ public class StudentActivity extends ListActivity implements OnRefreshListener {
 			doMySearch(query);
 
 		}
-
+		// Make select call to get list of upcoming events
 		new SelectTask(this).execute();
-
-		// Make select call.
-
 	}
 
 	private void setList() {
-		events = EventTest.sortByDate(events);
+		events = Event.sortByDate(events);
 		listItems.clear();
 		for (int i = 0; i < events.size(); i++) {
 			String toAdd = events.get(i).toString();
 			listItems.add(toAdd);
-			
-
 		}
 		listItems.add("\n");
 		adapter.notifyDataSetChanged();
 	}
 
 	private void showAlert(String message) {
-
 		new AlertDialog.Builder(this)
 				.setTitle("Info")
 				.setMessage(message)
@@ -101,7 +95,6 @@ public class StudentActivity extends ListActivity implements OnRefreshListener {
 								// do whatever.
 							}
 						})
-
 				.setIcon(android.R.drawable.ic_dialog_info).show();
 	}
 
@@ -110,24 +103,20 @@ public class StudentActivity extends ListActivity implements OnRefreshListener {
 		if (Intent.ACTION_SEARCH.equals(theIntent.getAction())) {
 			String query = theIntent.getStringExtra(SearchManager.QUERY);
 			doMySearch(query);
-
 		}
 	}
 
 	private void doMySearch(String query) {
-		// TODO Auto-generated method stub
 		lastSearch = query;
-		ArrayList<EventStruct> matchedEvents = EventTest.searchByTags(query,
+		ArrayList<Event> matchedEvents = Event.searchByTags(query,
 				events);
 		// listItems.add(query);
 		listItems.clear();
 		for (int i = 0; i < matchedEvents.size(); i++) {
 			String toAdd = matchedEvents.get(i).toString();
 			listItems.add(toAdd);
-
 		}
 		adapter.notifyDataSetChanged();
-
 	}
 
 	@Override
@@ -148,11 +137,13 @@ public class StudentActivity extends ListActivity implements OnRefreshListener {
 		return true;
 	}
 
-	@Override
+	/**
+	 * Handle action bar item clicks here. The action bar will automatically
+	 * handle clicks on the Home/Up button, so long as you specify a parent
+	 * activity in AndroidManifest.xml.
+	 * @Override
+	 */
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.reset) {
 			new SelectTask(this).execute();
@@ -168,14 +159,23 @@ public class StudentActivity extends ListActivity implements OnRefreshListener {
 		return super.onOptionsItemSelected(item);
 	}
 
-	// /////Danny's Task.
+	@Override
+	public void onRefresh() {
+		fromRefresh = true;
+		Toast.makeText(this, "How refreshing...", Toast.LENGTH_SHORT).show();
+		new SelectTask(this).execute();
+	}
+
+	/**
+	 * Danny's Task
+	 * @author Danny
+	 */
 	private class SelectTask extends AsyncTask<String, String, Void> {
 
 		private InputStream is = null;
 		private String result = null;
 		private String line = null;
-		private ArrayList<EventStruct> eventList = new ArrayList<EventStruct>();
-		private boolean done = false;
+		private ArrayList<Event> eventList = new ArrayList<Event>();
 		private Context mContext;
 
 		public SelectTask(Context context) {
@@ -184,7 +184,6 @@ public class StudentActivity extends ListActivity implements OnRefreshListener {
 
 		@Override
 		protected Void doInBackground(String... params) {
-			// TODO implement String params for sql query
 			// objects to send to php script (the sql query)
 			eventList.clear();
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -233,70 +232,30 @@ public class StudentActivity extends ListActivity implements OnRefreshListener {
 			// object
 			try {
 				JSONArray json_arr = new JSONArray(result);
-				// TODO create Event[] here
-				// Event[] events = new Event[json_arr.length()];
-
 				for (int i = 0; i < json_arr.length(); i++) {
 					JSONObject row = json_arr.getJSONObject(i);
 					String org = row.getString("org_name");
 					String evName = row.getString("event_name");
 					String loc = row.getString("event_location");
 					String startTime = row.getString("start_time");
-					GregorianCalendar starting = new GregorianCalendar();
-					// Setting date.
-					// "yyyy-MM-dd HH:mm:ss"
-
-					// char[] test = startTime.toCharArray();
-					// // if (test[6] == '0') {
-					// // test[5]--;
-					// // test[6] = '9';
-					// // } else {
-					// // test[6]--;
-					// // }
-					// startTime = new String(test);
-					// Calendar test = Calendar.getInstance();
-					Date date = sdf.parse(startTime);
-
-					starting.setTime(date);
-
-
-
 					String endTime = row.getString("end_time");
-					GregorianCalendar ending = new GregorianCalendar();
-
-					// test = endTime.toCharArray();
-					// // if (test[6] == '0') {
-					// // test[5]--;
-					// // test[6] = '9';
-					// // } else {
-					// // test[6]--;
-					// // }
-					// endTime = new String(test);
-
-					Date date2 = sdf.parse(endTime);
-
-					ending.setTime(date2);
-
 					String desc = row.getString("event_description");
 					String tags = row.getString("event_tags");
-					EventStruct toAdd = new EventStruct(org, evName, loc, tags,
-							desc, starting, ending);
-					eventList.add(toAdd);
-					// events[i] = new Event();
-					// events[i] = new Event(row.getString("org_name"),
-					// row.getString("event_name"),
-					// row.getString("event_location"),
-					// row.getString("start_time"), row.getString("end_time"),
-					// row.getString("event_description"),
-					// row.getString("event_tags"));
+					// format times
+					// convert start time string to calendar
+					GregorianCalendar starting = new GregorianCalendar();
+					Date startDate = sdf.parse(startTime);
+					starting.setTime(startDate);
+					// convert end time string to calendar
+					GregorianCalendar ending = new GregorianCalendar();
+					Date endDate = sdf.parse(endTime);
+					ending.setTime(endDate);
+					// add new event to the list
+					eventList.add(new Event(org, evName, loc, tags, desc,
+							starting, ending));
 				}
 				Log.e("pass 3", "json output conversion success ");
-				// TODO return
-				done = true;
-				// return events;
-
 				events = eventList;
-
 				return null;
 			} catch (Exception e) {
 				Log.e("Fail 3", e.toString());
@@ -313,8 +272,6 @@ public class StudentActivity extends ListActivity implements OnRefreshListener {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
-
 			if (fromRefresh && !lastSearch.equals("")) {
 				fromRefresh = false;
 				mSwipeRefreshLayout.setRefreshing(false);
@@ -325,24 +282,7 @@ public class StudentActivity extends ListActivity implements OnRefreshListener {
 			} else {
 				lastSearch = "";
 				setList();
-
 			}
 		}
-
-		//
-		// public ArrayList<EventStruct> grabIt() {
-		// while (!done) {
-		//
-		// }
-		// return eventList;
-		// }
-	}
-
-	@Override
-	public void onRefresh() {
-		// TODO Auto-generated method stub
-		fromRefresh = true;
-		Toast.makeText(this, "How refreshing...", Toast.LENGTH_SHORT).show();
-		new SelectTask(this).execute();
 	}
 }

@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,17 +30,18 @@ public class OrganizationForm extends ActionBarActivity {
 	private Button BendTime;
 	private Button Bsubmit;
 	private Button BDatePicker;
-
 	private String messageEventName;
 	private String messageOrgName;
 	private String messageEventLocation;
 	private String messageTags;
 	private String messageExtraInfo;
+	Calendar currentTime;
 
 	int eventDay = -1, eventMonth = -1, eventYear = -1;
+	int startHour = -1, startMinute = -1, endHour = -1, endMinute = -1;
 
-	int startHour = -1, startMinute = -1, finishHour = -1, finishMinute = -1;
-
+	// TODO strip invalid chars
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,71 +55,50 @@ public class OrganizationForm extends ActionBarActivity {
 		BendTime = (Button) findViewById(R.id.enterFinishTime);
 		Bsubmit = (Button) findViewById(R.id.submitButton);
 		BDatePicker = (Button) findViewById(R.id.datePickerB);
-
+		currentTime = Calendar.getInstance();
 		// Set up button listeners....
 		BstartTime.setOnClickListener(new OnClickListener() {
-
 			public void onClick(View v) {
-				// TODO Do button things.
 				createStartClock();
-
 			}
 		});
-
 		BendTime.setOnClickListener(new OnClickListener() {
-
 			public void onClick(View v) {
-				// TODO Do button things.
 				createEndClock();
-
 			}
 		});
-
 		Bsubmit.setOnClickListener(new OnClickListener() {
-
 			public void onClick(View v) {
-				// TODO Do button things.
-				submitNonsense();
-
+				checkForm();
 			}
 		});
-
 		BDatePicker.setOnClickListener(new OnClickListener() {
-
 			public void onClick(View v) {
-				// TODO Do button things.
 				createDatePicker();
-
 			}
 		});
-
 	}
 
-	protected void createDatePicker() {
-		// TODO Auto-generated method stub
-		Calendar mcurrentTime = Calendar.getInstance();
-
-		int day;
+	protected void createDatePicker(){
+		int day, month, year;
 		if (eventDay == -1) {
-			day = mcurrentTime.get(Calendar.DAY_OF_MONTH);
+			day = currentTime.get(Calendar.DAY_OF_MONTH);
 		} else {
 			day = eventDay;
 		}
-		int month;
 		if (eventMonth == -1) {
-			month = mcurrentTime.get(Calendar.MONTH);
+			month = currentTime.get(Calendar.MONTH);
 		} else {
-			month = eventMonth;
+			// -1 because the picker moves forward a month every time
+			month = eventMonth - 1;
 		}
-		int year;
 		if (eventYear == -1) {
-			year = mcurrentTime.get(Calendar.YEAR);
+			year = currentTime.get(Calendar.YEAR);
 		} else {
 			year = eventYear;
 		}
-
-		DatePickerDialog mDatePicker;
-		mDatePicker = new DatePickerDialog(this,
+		DatePickerDialog datePicker;
+		datePicker = new DatePickerDialog(this,
 				new DatePickerDialog.OnDateSetListener() {
 
 					int counter = 0;
@@ -125,7 +106,7 @@ public class OrganizationForm extends ActionBarActivity {
 					@Override
 					public void onDateSet(DatePicker view, int year,
 							int monthOfYear, int dayOfMonth) {
-						// TODO Auto-generated method stub
+						// TODO why?
 						if (counter == 0) {
 							eventDay = dayOfMonth;
 							eventMonth = monthOfYear + 1;
@@ -135,14 +116,15 @@ public class OrganizationForm extends ActionBarActivity {
 						counter++;
 					}
 				}, year, month, day);
-		mDatePicker.setTitle("Set the Date of your Event!");
-		mDatePicker.show();
+		datePicker.setTitle("Set the Date of your Event!");
+		datePicker.show();
 	}
 
-	protected void submitNonsense() {
-		// TODO Auto-generated method stub
-		boolean canWeSubmit = false;
-		String errorMessage = "The following fields have not been filled out:\n";
+	/**
+	 * Validation of user input
+	 */
+	protected void checkForm() {
+		String errorMessage = "The following fields are invalid:\n";
 		String successMessage = "Your form:\n";
 		// Need to check all the categories, if they aren't filled in tell user.
 		messageEventName = ETEventName.getText().toString();
@@ -150,158 +132,114 @@ public class OrganizationForm extends ActionBarActivity {
 		messageEventLocation = ETEventLocation.getText().toString();
 		messageTags = ETTages.getText().toString();
 		messageExtraInfo = ETExtraInfo.getText().toString();
-
-		boolean eventNameGood = false;
-		boolean orgNameGood = false;
-		boolean locationGood = false;
-		boolean tagsGood = false;
-		boolean extraInfoGood = false;
-		boolean startStopGood = false;
-		boolean startTimeGood = false;
-		boolean endTimeGood = false;
-		boolean dateGood = false;
+		
+		Drawable badBox = getResources().getDrawable(R.drawable.bad_box);
+		Drawable goodBox = getResources().getDrawable(R.drawable.cute_text_edit);
+		Drawable badButton = getResources().getDrawable(R.drawable.bad_button);
+		Drawable goodButton = getResources().getDrawable(R.drawable.pretty_button);
+		
+		boolean valid = true, validTimes = true;
 
 		// Make sure five fields are NOT blank.
 		// If they are, provide error messages.
+		// event name
 		if (!messageEventName.equals("")) {
-			eventNameGood = true;
-			ETEventName.setBackground(getResources().getDrawable(
-					R.drawable.cute_text_edit));
+			ETEventName.setBackground(goodBox);
 			successMessage += "Event name: " + messageEventName + "\n";
 		} else {
-			errorMessage += "-Event name was not specified.\n";
-			ETEventName.setBackground(getResources().getDrawable(
-					R.drawable.bad_box));
-			// debugToast(errorMessage);
+			errorMessage += "- Event name was not specified.\n";
+			ETEventName.setBackground(badBox);
+			valid = false;
 		}
-
+		// organization name
 		if (!messageOrgName.equals("")) {
-			orgNameGood = true;
-			ETOrgName.setBackground(getResources().getDrawable(
-					R.drawable.cute_text_edit));
+			ETOrgName.setBackground(goodBox);
 			successMessage += "Organization Name: " + messageOrgName + "\n";
 		} else {
-			ETOrgName.setBackground(getResources().getDrawable(
-					R.drawable.bad_box));
-			errorMessage += "-Organization was not specified.\n";
+			ETOrgName.setBackground(badBox);
+			errorMessage += "- Organization was not specified.\n";
+			valid = false;
 		}
-
+		// location
 		if (!messageEventLocation.equals("")) {
-			locationGood = true;
-			ETEventLocation.setBackground(getResources().getDrawable(
-					R.drawable.cute_text_edit));
+			ETEventLocation.setBackground(goodBox);
 			successMessage += "Event Location: " + messageEventLocation + "\n";
 		} else {
-			ETEventLocation.setBackground(getResources().getDrawable(
-					R.drawable.bad_box));
-			errorMessage += "-Location of event was not specified.\n";
-
+			ETEventLocation.setBackground(badBox);
+			errorMessage += "- Location of event was not specified.\n";
+			valid = false;
 		}
-
+		// tags
 		if (!messageTags.equals("")) {
-			tagsGood = true;
-			ETTages.setBackground(getResources().getDrawable(
-					R.drawable.cute_text_edit));
+			ETTages.setBackground(goodBox);
 			successMessage += "Tags: " + messageTags + "\n";
 		} else {
-			ETTages.setBackground(getResources()
-					.getDrawable(R.drawable.bad_box));
-
-			errorMessage += "-Your event did not specify any tags.\n";
-
+			ETTages.setBackground(badBox);
+			errorMessage += "- Your event did not specify any tags.\n";
+			valid = false;
 		}
-
+		// description
 		if (!messageExtraInfo.equals("")) {
-			extraInfoGood = true;
-			ETExtraInfo.setBackground(getResources().getDrawable(
-					R.drawable.cute_text_edit));
+			ETExtraInfo.setBackground(goodBox);
 			successMessage += "Event Details: " + messageExtraInfo + "\n";
 		} else {
-			ETExtraInfo.setBackground(getResources().getDrawable(
-					R.drawable.bad_box));
-			errorMessage += "-You didn't mention anything about your event! How are people suppose to know how great "
-					+ "or how fun it's going to be!?\n";
+			ETExtraInfo.setBackground(badBox);
+			errorMessage += "- You didn't add a description for your event.\n";
+			valid = false;
 		}
-		// Now need to check the start and finish.
-		// Make sure all have been set. Make sure event ends AFTER it
-		// starts...duh!
+		// check the start and finish times
+		// Make sure times are set and event ends AFTER it starts
 		if (startHour != -1 && startMinute != -1) {
-			startTimeGood = true;
-			BstartTime.setBackground(getResources().getDrawable(
-					R.drawable.pretty_button));
 		} else {
-			BstartTime.setBackground(getResources().getDrawable(
-					R.drawable.bad_button));
-			errorMessage += "You didn't specify a start time for your event.\n";
+			BstartTime.setBackground(badButton);
+			errorMessage += "- You didn't specify a start time for your event.\n";
+			valid = false;
+			validTimes = false;
 		}
 
-		if (finishHour != -1 && finishMinute != -1) {
-			endTimeGood = true;
-			BendTime.setBackground(getResources().getDrawable(
-					R.drawable.pretty_button));
+		if (endHour != -1 && endMinute != -1) {
 		} else {
-			BendTime.setBackground(getResources().getDrawable(
-					R.drawable.bad_button));
-			errorMessage += "You didn't specify an end time! If the event doesn't have one, simply put 23:59.\n";
+			BendTime.setBackground(badButton);
+			errorMessage += "- You didn't specify an end time! If the event doesn't have one, simply put 23:59.\n";
+			valid = false;
+			validTimes = false;
 		}
-
-		if (startTimeGood && endTimeGood) {
+		if (validTimes) {
 			// Check to make sure start time is before end time.
-			if (startHour < finishHour) {
-				startStopGood = true;
-				BstartTime.setBackground(getResources().getDrawable(
-						R.drawable.pretty_button));
-				BendTime.setBackground(getResources().getDrawable(
-						R.drawable.pretty_button));
+			if ((startHour < endHour) || startHour == endHour && startMinute < endMinute) {
+				BstartTime.setBackground(goodButton);
+				BendTime.setBackground(goodButton);
 				successMessage += "Event Start Time: " + startHour + ":"
-						+ startMinute + "\nEvent End Time: " + finishHour + ":"
-						+ finishMinute + "\n";
-			} else if (startHour == finishHour && startMinute < finishMinute) {
-				startStopGood = true;
-				BstartTime.setBackground(getResources().getDrawable(
-						R.drawable.pretty_button));
-				BendTime.setBackground(getResources().getDrawable(
-						R.drawable.pretty_button));
-				successMessage += "Event Start Time: " + startHour + ":"
-						+ startMinute + "\nEvent End Time: " + finishHour + ":"
-						+ finishMinute + "\n";
+						+ startMinute + "\nEvent End Time: " + endHour + ":"
+						+ endMinute + "\n";
 			} else {
-				BstartTime.setBackground(getResources().getDrawable(
-						R.drawable.bad_button));
-				BendTime.setBackground(getResources().getDrawable(
-						R.drawable.bad_button));
+				BstartTime.setBackground(badButton);
+				BendTime.setBackground(badButton);
 				errorMessage += "Your start time is after (or at the same time) as your finish time. Please adjust this "
 						+ "accordingly.\n";
+				validTimes = false;
 			}
 		}
-
-		// Just make sure date is empty.
+		// date
 		if (eventDay != -1 && eventMonth != -1 && eventYear != -1) {
-			dateGood = true;
-			BDatePicker.setBackground(getResources().getDrawable(
-					R.drawable.pretty_button));
+			BDatePicker.setBackground(goodButton);
 			successMessage += "Event Date: " + eventMonth + "/" + eventDay
-					+ "/" + eventYear + "\n";
+					+ "/" + eventYear;
 		} else {
 			errorMessage += "You didn't specify a date for your event!";
-			BDatePicker.setBackground(getResources().getDrawable(
-					R.drawable.bad_button));
+			BDatePicker.setBackground(badButton);
+			valid = false;
 		}
-
 		// Check if all info was good. If it is, present to user before
-		// submitting (one last check)
-		// Or if not, tell user what was wrong.
-		if (eventNameGood && orgNameGood && locationGood && tagsGood
-				&& extraInfoGood && startStopGood && dateGood) {
+		// submitting (one last check). If not, tell user what was wrong.
+		if (valid) {
 			infoGood(successMessage);
 		} else {
 			infoBad(errorMessage);
 		}
-
 	}
 
 	private void infoBad(String errorMessage) {
-		// TODO Auto-generated method stub
 		new AlertDialog.Builder(this)
 				.setTitle("Error!")
 				.setMessage(errorMessage)
@@ -312,15 +250,12 @@ public class OrganizationForm extends ActionBarActivity {
 								// continue with delete
 							}
 						})
-
 				.setIcon(android.R.drawable.ic_dialog_alert).show();
 	}
 
 	private void infoGood(String successMessage) {
-		// TODO Auto-generated method stub
 		new AlertDialog.Builder(this)
 				.setTitle("One last look!")
-
 				.setMessage(
 						"If everything looks ok, click \"ok\" and we'll submit it! "
 								+ "If not, simply click \"cancel\" and you can go back and modify your event.\n\n"
@@ -329,118 +264,108 @@ public class OrganizationForm extends ActionBarActivity {
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
 									int which) {
-								// continue with delete
+								// continue with submission
 								submitForm();
 							}
 						})
-
 				.setNegativeButton(android.R.string.cancel,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
 									int which) {
-								// continue with delete yeah
+								// go back to edit (do nothing)
 							}
 						}).setIcon(android.R.drawable.ic_menu_info_details)
 				.show();
 	}
 
 	protected void submitForm() {
-		// TODO Auto-generated method stub
-		debugToast("Submitting form");
-
+		debugToast("Submitting form...");
 		String start_time = eventYear + "-" + eventMonth + "-" + eventDay + " "
 				+ startHour + ":" + startMinute + ":00";
 		String end_time = eventYear + "-" + eventMonth + "-" + eventDay + " "
-				+ finishHour + ":" + finishMinute + ":00";
-
+				+ endHour + ":" + endMinute + ":00";
 		new InsertTask(getBaseContext()).execute(messageOrgName,
 				messageEventName, messageEventLocation, start_time, end_time,
 				messageTags, messageExtraInfo);
+		// exit submission form
 		finish();
-
 	}
-
-	protected void createEndClock() {
-		// TODO Auto-generated method stub
-		Calendar mcurrentTime = Calendar.getInstance();
-		int hour;
-		if (finishHour == -1) {
-			hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-		} else {
-			hour = finishHour;
-		}
-		int minute;
-		if (finishMinute == -1) {
-			minute = mcurrentTime.get(Calendar.MINUTE);
-		} else {
-			minute = finishMinute;
-		}
-		TimePickerDialog mTimePicker;
-		mTimePicker = new TimePickerDialog(this,
-				new TimePickerDialog.OnTimeSetListener() {
-
-					int count = 0;
-
-					public void onTimeSet(TimePicker timePicker,
-							int selectedHour, int selectedMinute) {
-						if (count == 0) {
-							finishHour = selectedHour;
-							finishMinute = selectedMinute;
-							String newTime = selectedHour + ":";
-							if(selectedMinute == 0) {newTime += "00";}
-							else {newTime += selectedMinute;}
-							
-							BendTime.setText(newTime);
-						}  
-						count++;
-					}
-				}, hour, minute, true);// Yes 24 hour time
-		mTimePicker.setTitle("Select Time");
-		mTimePicker.show();
-	}
-
+	
 	protected void createStartClock() {
-		// TODO Auto-generated method stub
-		Calendar mcurrentTime = Calendar.getInstance();
-		int hour;
+		// select default start time
+		int hour, minute;
 		if (startHour == -1) {
-			hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+			hour = currentTime.get(Calendar.HOUR_OF_DAY);
 		} else {
 			hour = startHour;
 		}
-		int minute;
 		if (startMinute == -1) {
-			minute = mcurrentTime.get(Calendar.MINUTE);
+			minute = 0;
 		} else {
 			minute = startMinute;
 		}
 		TimePickerDialog mTimePicker;
 		mTimePicker = new TimePickerDialog(this,
 				new TimePickerDialog.OnTimeSetListener() {
-
-					int count = 0;
-
 					public void onTimeSet(TimePicker timePicker,
 							int selectedHour, int selectedMinute) {
-						if (count == 0) {
-							startHour = selectedHour;
-							startMinute = selectedMinute;
-							String newTime = selectedHour + ":";
-							if(selectedMinute == 0) {newTime += "00";}
-							else {newTime += selectedMinute;}
-							
-							BstartTime.setText(newTime);
-						}
-						count++;
+						startHour = selectedHour;
+						startMinute = selectedMinute;
+						BstartTime.setText(formatTime(selectedHour, selectedMinute));
 					}
-
-				}, hour, minute, true);// Yes 24 hour time
-		mTimePicker.setTitle("Select Time");
+				}, hour, minute, false); // true for 24 hour time
+		mTimePicker.setTitle("Select Starting Time");
 		mTimePicker.show();
+	}
+	
+	protected void createEndClock() {
+		int hour, minute;
+		if (endHour == -1) {
+			hour = currentTime.get(Calendar.HOUR_OF_DAY);
+		} else {
+			hour = endHour;
+		}
+		if (endMinute == -1) {
+			// minute = currentTime.get(Calendar.MINUTE);
+			minute = 0;
+		} else {
+			minute = endMinute;
+		}
+		TimePickerDialog mTimePicker;
+		mTimePicker = new TimePickerDialog(this,
+				new TimePickerDialog.OnTimeSetListener() {
+					public void onTimeSet(TimePicker timePicker,
+							int selectedHour, int selectedMinute) {
+						endHour = selectedHour;
+						endMinute = selectedMinute;
+						BendTime.setText(formatTime(selectedHour, selectedMinute));
+					}
+				}, hour, minute, false); // true for 24 hour time
+		mTimePicker.setTitle("Select Ending Time");
+		mTimePicker.show();
+	}
+	
+	/**
+	 * Turns an hour and minute into a human-readable time.<br>
+	 * Ex: formatTime(13, 30) = "1:30 PM"
+	 * @param hour - the hour of the time
+	 * @param min - the minute of the time
+	 * @return a string representing the given time
+	 * @warning undefined behavior for hour > 23, min > 60
+	 */
+	private String formatTime(int hour, int min) {
+		String str = "";
+		str += (hour > 12) ? hour - 12 : hour;
+		str += ":";
+		if (min < 10) {
+			str += "0";
+		}
+		str += min;
+		str += (hour < 12) ? " AM" : " PM";
+		return str;
 	}
 
 	protected void debugToast(String message) {
-		// TODO Auto-generated method stub
 		Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 	}
 

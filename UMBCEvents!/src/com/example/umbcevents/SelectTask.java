@@ -32,13 +32,12 @@ import android.widget.Toast;
  * @author Daniel Smith
  */
 // TODO Change to <String, Void, Events[]>
-public class SelectTask extends AsyncTask<String, String, ArrayList<EventStruct>> {
+public class SelectTask extends AsyncTask<String, String, ArrayList<Event>> {
 
 	private InputStream is = null;
 	private String result = null;
 	private String line = null;
-	private ArrayList<EventStruct> eventList = new ArrayList<EventStruct>();
-	private boolean done = false;
+	private ArrayList<Event> eventList = new ArrayList<Event>();
 	private Context mContext;
 
 	public SelectTask(Context context) {
@@ -46,7 +45,7 @@ public class SelectTask extends AsyncTask<String, String, ArrayList<EventStruct>
 	}
 
 	@Override
-	protected ArrayList<EventStruct> doInBackground(String... params) {
+	protected ArrayList<Event> doInBackground(String... params) {
 		// TODO implement String params for sql query
 		// objects to send to php script (the sql query)
 		eventList.clear();
@@ -142,7 +141,7 @@ public class SelectTask extends AsyncTask<String, String, ArrayList<EventStruct>
 
 				String desc = row.getString("event_description");
 				String tags = row.getString("event_tags");
-				EventStruct toAdd = new EventStruct(org, evName, loc, tags,
+				Event toAdd = new Event(org, evName, loc, tags,
 						desc, starting, ending);
 				eventList.add(toAdd);
 				// events[i] = new Event();
@@ -154,7 +153,6 @@ public class SelectTask extends AsyncTask<String, String, ArrayList<EventStruct>
 			}
 			Log.e("pass 3", "json output conversion success ");
 			// TODO return
-			done = true;
 			// return events;
 			return eventList;
 		} catch (Exception e) {
@@ -164,7 +162,7 @@ public class SelectTask extends AsyncTask<String, String, ArrayList<EventStruct>
 	}
 
 	@Override
-	protected void onPostExecute(ArrayList<EventStruct> result) {
+	protected void onPostExecute(ArrayList<Event> result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 	}
