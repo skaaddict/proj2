@@ -34,7 +34,7 @@
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/cute_text_edit"
-            android:hint="Organization Name"
+            android:hint="@string/orgNameHint"
             android:textCursorDrawable="@drawable/better_cursor"
              android:maxLength="63" />
 

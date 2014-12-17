@@ -20,29 +20,43 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
 		// Create button listeners for navigation to organization and student
 		// activities.
-
 		Button orgButton = (Button) findViewById(R.id.organizationButton);
 		orgButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				// Go to orginization.
+				// Go to organization
 				gotoOrgForm();
 
 			}
 		});
-
 		Button stuButton = (Button) findViewById(R.id.studentButton);
 		stuButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				// Go to student activity.
+				// Go to student activity
 				gotoStudentActivity();
 
 			}
 		});
+	}
+	
+	// TODO call me
+	private void diplaySplashScreen() {
+		Thread splashTimer = new Thread() {
+			public void run() {
+				try {
+					sleep(5000);
+					startActivity(new Intent(MainActivity.this, Splash.class));
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} finally {
+					// notice empty
+				} 
+			}
+		};
+		splashTimer.start();
 	}
 
 	protected void gotoOrgForm() {

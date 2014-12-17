@@ -2,14 +2,17 @@
 <resources>
 
     <string name="app_name">UMBC Events!</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="orgName">Organization Name:</string>
     <string name="orgButtonString">Organization Mode</string>
     <string name="stuButtonString">Student Mode</string>
     <string name="title_activity_organization_form">Organization Form</string>
     <string name="title_activity_student">Events!</string>
-    <string name="orgSettingSummary">To fill in later</string>
+    <string name="submitMessage">After filling in all the information, 
+        click the submit button.</string>
+    <string name="resetInfo">Reset</string>
+    <string name="menu_settings">Settings</string>
+    <!-- hint values -->
+    <string name="orgNameHint">Organization Name</string>
     <string name="eventNameHint">Event Name</string>
     <string name="eventLocHint">Event Location</string>
     <string name="startTimeButton">Enter Start Time!</string>
@@ -17,12 +20,17 @@
     <string name="tagHint">Tags (comma separated)</string>
     <string name="eventInfo">Event Description</string>
     <string name="submitButtonText">Submit</string>
-    <string name="submitMessage">After filling in all the information, 
-        click the submit button.</string>
     <string name="datePickerButton">Enter a date for you event!</string>
     <string name="search_hint">Search Events</string>
+    <!-- splash screen values -->
+    <string name="splashText">Splash</string>
+    <!-- preference settings values -->
+    <string name="pref_orgName">Organization Name</string>
+    <string name="orgSettingSummary">Save the name of your organization</string>
+    <string name="pref_clock">Clock type</string>
+    <string name="clockSettingSummary">Use 12 hour clock?</string>
+    <!-- Junk -->
     <string name="search">Search</string>
     <string name="helpInfo">Help</string>
-    <string name="resetInfo">Reset</string>
-        
+
 </resources>

@@ -7,8 +7,11 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +38,10 @@ public class OrganizationForm extends ActionBarActivity {
 	private String messageEventLocation;
 	private String messageTags;
 	private String messageExtraInfo;
+	// preference member variables
+	private String prefOrgName;
+	private boolean prefClockType;
+	private SharedPreferences prefs ;
 	Calendar currentTime;
 
 	int eventDay = -1, eventMonth = -1, eventYear = -1;
@@ -56,14 +63,18 @@ public class OrganizationForm extends ActionBarActivity {
 		Bsubmit = (Button) findViewById(R.id.submitButton);
 		BDatePicker = (Button) findViewById(R.id.datePickerB);
 		currentTime = Calendar.getInstance();
+		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		setPreferences();
 		// Set up button listeners....
 		BstartTime.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
+				setClockPreferences();
 				createStartClock();
 			}
 		});
 		BendTime.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
+				setClockPreferences();
 				createEndClock();
 			}
 		});
@@ -77,6 +88,21 @@ public class OrganizationForm extends ActionBarActivity {
 				createDatePicker();
 			}
 		});
+	}
+	
+	/**
+	 *  get preferences
+	 */
+	private void setPreferences(){
+		setClockPreferences();
+		prefOrgName = prefs.getString("pref_org_name", null);
+		if(prefOrgName != null){
+			ETOrgName.setText(prefOrgName);
+		}
+	}
+	
+	private void setClockPreferences(){
+		prefClockType = prefs.getBoolean("pref_clock", false);
 	}
 
 	protected void createDatePicker(){
@@ -278,7 +304,7 @@ public class OrganizationForm extends ActionBarActivity {
 				.show();
 	}
 
-	protected void submitForm() {
+	private void submitForm() {
 		debugToast("Submitting form...");
 		String start_time = eventYear + "-" + eventMonth + "-" + eventDay + " "
 				+ startHour + ":" + startMinute + ":00";
@@ -291,7 +317,7 @@ public class OrganizationForm extends ActionBarActivity {
 		finish();
 	}
 	
-	protected void createStartClock() {
+	private void createStartClock() {
 		// select default start time
 		int hour, minute;
 		if (startHour == -1) {
@@ -313,12 +339,13 @@ public class OrganizationForm extends ActionBarActivity {
 						startMinute = selectedMinute;
 						BstartTime.setText(formatTime(selectedHour, selectedMinute));
 					}
-				}, hour, minute, false); // true for 24 hour time
+				}, hour, minute, prefClockType); // true for 24 hour time
 		mTimePicker.setTitle("Select Starting Time");
 		mTimePicker.show();
 	}
 	
-	protected void createEndClock() {
+	// TODO pick end time based on start time
+	private void createEndClock() {
 		int hour, minute;
 		if (endHour == -1) {
 			hour = currentTime.get(Calendar.HOUR_OF_DAY);
@@ -340,7 +367,7 @@ public class OrganizationForm extends ActionBarActivity {
 						endMinute = selectedMinute;
 						BendTime.setText(formatTime(selectedHour, selectedMinute));
 					}
-				}, hour, minute, false); // true for 24 hour time
+				}, hour, minute, prefClockType); // true for 24 hour time
 		mTimePicker.setTitle("Select Ending Time");
 		mTimePicker.show();
 	}
@@ -355,17 +382,28 @@ public class OrganizationForm extends ActionBarActivity {
 	 */
 	private String formatTime(int hour, int min) {
 		String str = "";
-		str += (hour > 12) ? hour - 12 : hour;
-		str += ":";
-		if (min < 10) {
-			str += "0";
+		if(prefClockType){
+			// 24 hour clock
+			str +=  hour;
+			str += ":";
+			if (min < 10) {
+				str += "0";
+			}
+			str += min;
+		} else{
+			// 12 hour clock
+			str += (hour > 12) ? hour - 12 : hour;
+			str += ":";
+			if (min < 10) {
+				str += "0";
+			}
+			str += min;
+			str += (hour < 12) ? " AM" : " PM";
 		}
-		str += min;
-		str += (hour < 12) ? " AM" : " PM";
 		return str;
 	}
 
-	protected void debugToast(String message) {
+	private void debugToast(String message) {
 		Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 	}
 
@@ -376,15 +414,23 @@ public class OrganizationForm extends ActionBarActivity {
 		return true;
 	}
 
-	@Override
+	/**
+	 * Handle action bar item clicks here. The action bar will automatically
+	 * handle clicks on the Home/Up button, so long as you specify a parent
+	 * activity in AndroidManifest.xml.
+	 * @Override
+	 */
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
+			goToSettings();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	private void goToSettings() {
+		Intent intent = new Intent(this, SettingsActivity.class);
+		startActivity(intent);
 	}
 }
