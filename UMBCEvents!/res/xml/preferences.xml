@@ -4,15 +4,21 @@
     <!-- 
         android:defaultValue="None" -->
     <EditTextPreference
-        android:key="pref_org_name"
-        android:title="@string/pref_orgName" 
-        android:summary="@string/orgSettingSummary"/>
+        android:key="pref_orgName"
+        android:title="@string/pref_orgName_title" 
+        android:summary="@string/pref_orgName_summary"/>
+    
+     <EditTextPreference
+        android:key="pref_location"
+        android:title="@string/pref_location_title" 
+        android:summary="@string/pref_location_summary"/>
     
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="pref_clock"
-        android:title="Use 24 Hour Clock?"
-        android:summaryOn="Using 24 Hour Clock"
-        android:summaryOff="Using 12 Hour Clock"/>
+        android:title="@string/pref_clock_title"
+        android:summaryOn="@string/pref_clock_on"
+        android:summaryOff="@string/pref_clock_off"
+        android:summary="@string/pref_clock_summary"/>
 
 </PreferenceScreen>

@@ -3,7 +3,7 @@
     <EditTextPreference
         android:defaultValue="None"
         android:key="pref_org_name"
-        android:title="@string/pref_orgName" />
+        android:title="@string/pref_orgName_title" />
 
     <CheckBoxPreference
         android:defaultValue="true"

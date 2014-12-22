@@ -25,10 +25,15 @@
     <!-- splash screen values -->
     <string name="splashText">Splash</string>
     <!-- preference settings values -->
-    <string name="pref_orgName">Organization Name</string>
-    <string name="orgSettingSummary">Save the name of your organization</string>
+    <string name="pref_orgName_title">Organization Name</string>
+    <string name="pref_orgName_summary">Save the name of your organization</string>
+    <string name="pref_location_title">Default Location</string>
+    <string name="pref_location_summary">Save a default location for your event</string>
     <string name="pref_clock">Clock type</string>
-    <string name="clockSettingSummary">Use 12 hour clock?</string>
+    <string name="pref_clock_title">Use 24 Hour Clock?"</string>
+    <string name="pref_clock_on">Using 24 Hour Clock</string>
+    <string name="pref_clock_off">Using 12 Hour Clock</string>
+    <string name="pref_clock_summary">Use 12 hour clock?</string>
     <!-- Junk -->
     <string name="search">Search</string>
     <string name="helpInfo">Help</string>

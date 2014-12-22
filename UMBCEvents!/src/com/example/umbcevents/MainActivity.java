@@ -11,8 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 /**
- * The starting page of the application that allows the user to select which
- * mode to use.
+ * The starting page of the application that allows the user to select which mode to use.
  */
 public class MainActivity extends ActionBarActivity {
 
@@ -41,7 +40,7 @@ public class MainActivity extends ActionBarActivity {
 			}
 		});
 	}
-	
+
 	// TODO call me
 	private void diplaySplashScreen() {
 		Thread splashTimer = new Thread() {
@@ -53,7 +52,7 @@ public class MainActivity extends ActionBarActivity {
 					e.printStackTrace();
 				} finally {
 					// notice empty
-				} 
+				}
 			}
 		};
 		splashTimer.start();
@@ -69,7 +68,7 @@ public class MainActivity extends ActionBarActivity {
 		Intent intent = new Intent(this, StudentActivity.class);
 		startActivity(intent);
 	}
-	
+
 	private void goToSettings() {
 		Intent intent = new Intent(this, SettingsActivity.class);
 		startActivity(intent);
@@ -83,9 +82,8 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	/**
-	 * Handle action bar item clicks here. The action bar will automatically
-	 * handle clicks on the Home/Up button, so long as you specify a parent
-	 * activity in AndroidManifest.xml.
+	 * Handle action bar item clicks here. The action bar will automatically handle clicks on the
+	 * Home/Up button, so long as you specify a parent activity in AndroidManifest.xml.
 	 * @Override
 	 */
 	public boolean onOptionsItemSelected(MenuItem item) {
